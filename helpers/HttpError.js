@@ -1,6 +1,11 @@
-const HttpError = (status, message) => {
+const httpMessages = require("../constants/httpMessages");
+
+const HttpError = (
+  statusCode = 500,
+  message = httpMessages[statusCode] || httpMessages.default
+) => {
   const error = new Error(message);
-  error.status = status;
+  error.statusCode = statusCode;
   return error;
 };
 
