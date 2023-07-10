@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ctrl = require("../../controllers/contactsController");
-const { validateBody } = require("../../middlewares");
+const { validateBody, isValidId } = require("../../middlewares");
 const schemas = require("../../schemas/contactsSchema");
 
 router
@@ -11,8 +11,15 @@ router
 
 router
   .route("/:contactId")
-  .get(ctrl.getContactById)
-  .delete(ctrl.removeContact)
-  .put(validateBody(schemas.addSchema), ctrl.updateContact);
+  .get(isValidId, ctrl.getContactById)
+  .put(isValidId, validateBody(schemas.addSchema), ctrl.updateContact)
+  .delete(isValidId, ctrl.removeContact);
 
+router
+  .route("/:contactId/favorite")
+  .patch(
+    isValidId,
+    validateBody(schemas.updateFavoriteSchema),
+    ctrl.updateStatusContact
+  );
 module.exports = router;
