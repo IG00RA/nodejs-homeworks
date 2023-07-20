@@ -1,6 +1,7 @@
 const { User } = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const { SECRET_KEY } = process.env;
 
 const { HttpError, ctrlWrapper } = require("../helpers");
