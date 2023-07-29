@@ -1,23 +1,7 @@
-const Joi = require("joi");
 const { Schema } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 
 const emailFormat = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-
-const registerSchema = Joi.object({
-  subscription: Joi.string(),
-  password: Joi.string().required(),
-  email: Joi.string().pattern(emailFormat).required(),
-});
-
-const loginSchema = Joi.object({
-  password: Joi.string().required(),
-  email: Joi.string().pattern(emailFormat).required(),
-});
-
-const emailSchema = Joi.object({
-  email: Joi.string().pattern(emailFormat).required(),
-});
 
 const userSchema = new Schema(
   {
@@ -58,8 +42,5 @@ const userSchema = new Schema(
 userSchema.post("save", handleMongooseError);
 
 module.exports = {
-  registerSchema,
-  loginSchema,
   userSchema,
-  emailSchema,
 };
