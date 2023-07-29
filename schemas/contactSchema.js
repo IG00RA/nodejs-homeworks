@@ -1,6 +1,6 @@
 const Joi = require("joi");
 const { Schema } = require("mongoose");
-const handleMongooseError = require("../helpers/handleMongooseError");
+const { handleMongooseError } = require("../helpers");
 
 const addSchema = Joi.object({
   name: Joi.string().required(),
