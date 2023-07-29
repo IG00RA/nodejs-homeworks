@@ -1,6 +1,6 @@
 const Joi = require("joi");
 const { Schema } = require("mongoose");
-const handleMongooseError = require("../helpers/handleMongooseError");
+const { handleMongooseError } = require("../helpers");
 
 const emailFormat = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 
@@ -12,6 +12,10 @@ const registerSchema = Joi.object({
 
 const loginSchema = Joi.object({
   password: Joi.string().required(),
+  email: Joi.string().pattern(emailFormat).required(),
+});
+
+const emailSchema = Joi.object({
   email: Joi.string().pattern(emailFormat).required(),
 });
 
@@ -39,6 +43,15 @@ const userSchema = new Schema(
     avatarURL: {
       type: String,
     },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, "Verify token is required"],
+      default: "",
+    },
   },
   { versionKey: false }
 );
@@ -48,4 +61,5 @@ module.exports = {
   registerSchema,
   loginSchema,
   userSchema,
+  emailSchema,
 };
