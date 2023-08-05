@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-require("dotenv").config();
 const { MAIL_APP_PASS } = process.env;
 
 const nodemailerConfig = {
