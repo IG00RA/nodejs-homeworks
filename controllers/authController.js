@@ -1,7 +1,6 @@
 const { User } = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const { SECRET_KEY } = process.env;
 const { BASE_URL } = process.env;
 const gravatar = require("gravatar");
@@ -125,6 +124,7 @@ const logout = async (req, res) => {
 
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
+
   const { path: tempUpload, originalname } = req.file;
   const avatarName = `${_id}_${originalname}`;
   const resultUpload = path.join(avatarsDir, avatarName);

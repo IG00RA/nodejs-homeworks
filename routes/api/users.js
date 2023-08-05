@@ -24,4 +24,5 @@ router.route("/verify").post(validateBody(emailSchema), ctrl.resendVerifyEmail);
 router
   .route("/avatars")
   .patch(authenticate, upload.single("avatar"), ctrl.updateAvatar);
+
 module.exports = router;
