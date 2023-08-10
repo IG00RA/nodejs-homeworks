@@ -1,8 +1,7 @@
 const { User } = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { SECRET_KEY } = process.env;
-const { BASE_URL } = process.env;
+const { SECRET_KEY, BASE_URL } = process.env;
 const gravatar = require("gravatar");
 const path = require("path");
 const fs = require("fs/promises");
